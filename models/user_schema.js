@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const bcrypt = require("bcrypt");
 const { Schema, model } = mongoose;
 
 const userSchema = new Schema(
@@ -34,6 +34,14 @@ const userSchema = new Schema(
     timestamps: true,
   }
 );
+
+//mongoose middleware
+userSchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
+    this.password = await bcrypt.hash(this.password, 16);
+  }
+  next();
+});
 
 const UserModel = model("user", userSchema);
 
