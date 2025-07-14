@@ -10,7 +10,12 @@ const { apiRouter } = require("./api/v1/routes.js");
 
 app.use(express.json()); //read the body dat   in json formate
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 app.use((req, res, next) => {
   console.log("----------");

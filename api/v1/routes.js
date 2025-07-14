@@ -6,5 +6,6 @@ const apiRouter = express.Router();
 
 apiRouter.use("/products", productRouter);
 apiRouter.use("/auth", authRouter);
+apiRouter.use("/auth", userRouter);
 
 module.exports = { apiRouter };
